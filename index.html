@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carpark Finder SG</title>
+
+  <!-- Leaflet (Map) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- Icons (optional, for buttons) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <!-- Our custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <i class="fa-solid fa-square-parking"></i>
+      <span>Carpark Finder SG</span>
+    </div>
+    <div class="actions">
+      <button id="btnLocate" class="btn primary"><i class="fa-solid fa-location-crosshairs"></i> Locate Me</button>
+      <button id="btnReset" class="btn"><i class="fa-solid fa-rotate"></i> Reset</button>
+      <span class="btn" style="cursor:default;">
+        <i class="fa-regular fa-compass"></i>
+        <span id="countBadge" class="badge">0 carparks</span>
+      </span>
+    </div>
+  </header>
+
+  <main>
+    <div id="map" class="panel"></div>
+
+    <aside>
+      <div class="panel searchbar">
+        <input id="search" class="input" type="text" placeholder="Search by development or area…" />
+        <select id="selectCarpark" title="Choose carpark">
+          <option value="">Choose a carpark…</option>
+        </select>
+      </div>
+
+      <div class="panel filters">
+        <select id="sort">
+          <option value="lots-desc">Sort: Most lots</option>
+          <option value="lots-asc">Sort: Fewest lots</option>
+          <option value="name-asc">Sort: Name A→Z</option>
+          <option value="distance-asc">Sort: Nearest</option>
+        </select>
+        <select id="lotType">
+          <option value="">Lot type: Any</option>
+          <option value="C">C (Cars)</option>
+          <option value="H">H (Heavy)</option>
+          <option value="Y">Y (Motorcycles)</option>
+        </select>
+      </div>
+
+      <div id="list" class="panel list"></div>
+
+      <div class="panel details" id="details">
+        <small class="muted">Select a carpark to see details</small>
+        <h3 id="dName">—</h3>
+        <div class="meta grid2">
+          <div><span class="muted">Area</span><br><span id="dArea">—</span></div>
+          <div><span class="muted">Available lots</span><br><span id="dLots">—</span></div>
+          <div><span class="muted">Lot type</span><br><span id="dLotType">—</span></div>
+          <div><span class="muted">Agency</span><br><span id="dAgency">—</span></div>
+          <div><span class="muted">Distance</span><br><span id="dDistance">—</span></div>
+          <div><span class="muted">Coordinates</span><br><span id="dCoords">—</span></div>
+        </div>
+        <div>
+          <a id="dOpenMaps" class="link" href="#" target="_blank" rel="noopener">Open in Google Maps →</a>
+        </div>
+        <div class="legend">
+          <span class="pill good"><i class="fa-solid fa-circle"></i> &gt; 500 lots</span>
+          <span class="pill mid"><i class="fa-solid fa-circle"></i> 200–500 lots</span>
+          <span class="pill low"><i class="fa-solid fa-circle"></i> &lt; 200 lots</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Our app logic -->
+  <script src="app.js"></script>
+</body>
+</html>
