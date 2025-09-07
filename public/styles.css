@@ -28,8 +28,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
+  gap: 15px;
+  padding: 14px 14px;
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(6px);
   position: sticky;
@@ -37,7 +37,7 @@ header {
   z-index: 10;
   background: linear-gradient(180deg, rgba(10,12,24,.8), rgba(10,12,24,.55));
 }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; justify-content: center; }
 .brand i { color: var(--brand); }
 .brand span { font-size: 1.05rem; }
 

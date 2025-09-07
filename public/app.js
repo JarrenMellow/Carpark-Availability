@@ -1,24 +1,30 @@
 // ------------------------------
 // Mock API Data (Replace later with a real fetch if desired)
 // ------------------------------
-const API_DATA = {
-  "value": [
-    { "CarParkID":"1","Area":"Marina","Development":"Suntec City","Location":"1.29375 103.85718","AvailableLots":1104,"LotType":"C","Agency":"LTA" },
-    { "CarParkID":"2","Area":"Marina","Development":"Marina Square","Location":"1.29115 103.85728","AvailableLots":1091,"LotType":"C","Agency":"LTA" },
-    { "CarParkID":"3","Area":"Marina","Development":"Raffles City","Location":"1.29382 103.85319","AvailableLots":453,"LotType":"C","Agency":"LTA" },
-    { "CarParkID":"4","Area":"Marina","Development":"The Esplanade","Location":"1.29011 103.85561","AvailableLots":448,"LotType":"C","Agency":"LTA" },
-    { "CarParkID":"5","Area":"Marina","Development":"Millenia Singapore","Location":"1.29251 103.86009","AvailableLots":532,"LotType":"C","Agency":"LTA" }
-  ]
-};
+// const API_DATA = {
+//   "value": [
+//     { "CarParkID":"1","Area":"Marina","Development":"Suntec City","Location":"1.29375 103.85718","AvailableLots":1104,"LotType":"C","Agency":"LTA" },
+//     { "CarParkID":"2","Area":"Marina","Development":"Marina Square","Location":"1.29115 103.85728","AvailableLots":1091,"LotType":"C","Agency":"LTA" },
+//     { "CarParkID":"3","Area":"Marina","Development":"Raffles City","Location":"1.29382 103.85319","AvailableLots":453,"LotType":"C","Agency":"LTA" },
+//     { "CarParkID":"4","Area":"Marina","Development":"The Esplanade","Location":"1.29011 103.85561","AvailableLots":448,"LotType":"C","Agency":"LTA" },
+//     { "CarParkID":"5","Area":"Marina","Development":"Millenia Singapore","Location":"1.29251 103.86009","AvailableLots":532,"LotType":"C","Agency":"LTA" }
+//   ]
+// };
 
-// If you want live data later, swap this in:
-// async function getData(){
-//   const res = await fetch('https://datamall2.mytransport.sg/ltaodataservice/CarParkAvailabilityv2', {
-//     headers: { 'AccountKey': 'YOUR_LTA_KEY_HERE', 'accept': 'application/json' }
-//   });
-//   const data = await res.json();
-//   return data.value;
-// }
+async function getData(){
+  try {
+    const res = await fetch("/api/carparks"); // call your backend proxy
+    if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+    const data = await res.json();
+    return data.value; // frontend logic stays the same
+  } catch (e) {
+    alert("Failed to fetch carpark data. Please try again later.");
+    return [];
+  }
+}
+
+
+const API_DATA = await getData();
 
 // ------------------------------
 // Helpers
@@ -56,7 +62,7 @@ function fmtDistance(m){
 // State
 // ------------------------------
 let userPos = null;
-const carparks = API_DATA.value.map(v => ({
+const carparks = API_DATA.map(v => ({
   ...v,
   id: v.CarParkID,
   name: v.Development,
@@ -111,6 +117,9 @@ function addMarkers(){
     markerById.set(cp.id, m);
   });
 }
+
+
+
 addMarkers();
 
 // ------------------------------

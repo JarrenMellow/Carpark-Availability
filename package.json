@@ -1,0 +1,25 @@
+{
+  "name": "carparkspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JarrenMellow/Carpark-Availability.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JarrenMellow/Carpark-Availability/issues"
+  },
+  "homepage": "https://github.com/JarrenMellow/Carpark-Availability#readme",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2"
+  }
+}
